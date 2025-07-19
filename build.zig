@@ -636,6 +636,20 @@ pub fn build(b: *std.Build) void {
     const memory_test_step = b.step("test-memory", "Run Memory tests");
     memory_test_step.dependOn(&run_memory_test.step);
 
+    // Add Memory Leak tests
+    const memory_leak_test = b.addTest(.{
+        .name = "memory-leak-test",
+        .root_source_file = b.path("test/evm/memory_leak_test.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    memory_leak_test.root_module.addImport("evm", evm_mod);
+    memory_leak_test.root_module.addImport("primitives", primitives_mod);
+
+    const run_memory_leak_test = b.addRunArtifact(memory_leak_test);
+    const memory_leak_test_step = b.step("test-memory-leak", "Run Memory leak prevention tests");
+    memory_leak_test_step.dependOn(&run_memory_leak_test.step);
+
     // Add Stack tests
     const stack_test = b.addTest(.{
         .name = "stack-test",

@@ -671,6 +671,66 @@ pub fn clear_transient_storage(self: *EvmState) void {
     self.transient_storage.clearAndFree();
 }
 
+/// Clear logs for a new transaction.
+///
+/// Removes all logs from the current collection and frees their memory.
+/// This should be called at the start of each transaction to prevent
+/// memory accumulation.
+///
+/// ## Memory Management
+/// This function properly frees the allocated memory for log topics
+/// and data before clearing the list.
+///
+/// ## Example
+/// ```zig
+/// // At start of new transaction
+/// state.clear_logs();
+/// ```
+pub fn clear_logs(self: *EvmState) void {
+    Log.debug("EvmState.clear_logs: Clearing {} logs", .{self.logs.items.len});
+    
+    // Free allocated memory for each log
+    for (self.logs.items) |log| {
+        self.allocator.free(log.topics);
+        self.allocator.free(log.data);
+    }
+    
+    // Clear the list while retaining capacity for future use
+    self.logs.clearRetainingCapacity();
+}
+
+/// Clear selfdestruct list for a new transaction.
+///
+/// Removes all entries from the selfdestruct mapping. This should be
+/// called after processing selfdestructs at the end of a transaction.
+///
+/// ## Example
+/// ```zig
+/// // After processing selfdestructs
+/// state.clear_selfdestructs();
+/// ```
+pub fn clear_selfdestructs(self: *EvmState) void {
+    Log.debug("EvmState.clear_selfdestructs: Clearing {} selfdestructs", .{self.selfdestructs.count()});
+    self.selfdestructs.clearRetainingCapacity();
+}
+
+/// Clear all transaction-scoped state.
+///
+/// Convenience function that clears transient storage, logs, and
+/// selfdestructs in one call. Use this at transaction boundaries.
+///
+/// ## Example
+/// ```zig
+/// // At end of transaction
+/// state.clear_transaction_state();
+/// ```
+pub fn clear_transaction_state(self: *EvmState) void {
+    Log.debug("EvmState.clear_transaction_state: Clearing all transaction state", .{});
+    self.clear_transient_storage();
+    self.clear_logs();
+    self.clear_selfdestructs();
+}
+
 // Tests
 
 const testing = std.testing;
@@ -1696,4 +1756,170 @@ test "EvmState fuzz: edge value testing with extreme values" {
     try state.emit_log(extreme_addresses[0], &max_topics, max_data);
     const log = state.logs.items[state.logs.items.len - 1];
     try testing.expectEqualSlices(u256, &max_topics, log.topics);
+}
+
+test "EvmState clear_logs properly frees memory" {
+    const allocator = testing.allocator;
+
+    var memory_db = MemoryDatabase.init(allocator);
+    defer memory_db.deinit();
+
+    const db_interface = memory_db.to_database_interface();
+    var state = try EvmState.init(allocator, db_interface);
+    defer state.deinit();
+
+    const addr = testAddress(0x1234);
+
+    // Emit multiple logs with varying data sizes
+    for (0..10) |i| {
+        const topics = [_]u256{ i, i * 2, i * 3 };
+        const data_size = (i + 1) * 100;
+        const data = try allocator.alloc(u8, data_size);
+        defer allocator.free(data);
+        @memset(data, @as(u8, @intCast(i)));
+
+        try state.emit_log(addr, &topics, data);
+    }
+
+    try testing.expectEqual(@as(usize, 10), state.logs.items.len);
+
+    // Clear logs should free all memory
+    state.clear_logs();
+    try testing.expectEqual(@as(usize, 0), state.logs.items.len);
+
+    // Emit more logs to ensure reusability
+    const topics = [_]u256{1, 2};
+    const data = &[_]u8{ 0xFF, 0xEE };
+    try state.emit_log(addr, &topics, data);
+    try testing.expectEqual(@as(usize, 1), state.logs.items.len);
+}
+
+test "EvmState clear_selfdestructs" {
+    const allocator = testing.allocator;
+
+    var memory_db = MemoryDatabase.init(allocator);
+    defer memory_db.deinit();
+
+    const db_interface = memory_db.to_database_interface();
+    var state = try EvmState.init(allocator, db_interface);
+    defer state.deinit();
+
+    // Mark multiple accounts for selfdestruct
+    for (0..100) |i| {
+        const addr = testAddress(@as(u160, @intCast(i)));
+        const recipient = testAddress(@as(u160, @intCast(i + 1000)));
+        try state.mark_selfdestruct(addr, recipient);
+    }
+
+    try testing.expectEqual(@as(usize, 100), state.selfdestructs.count());
+
+    // Clear selfdestructs
+    state.clear_selfdestructs();
+    try testing.expectEqual(@as(usize, 0), state.selfdestructs.count());
+
+    // Verify we can add more
+    const addr = testAddress(0x9999);
+    const recipient = testAddress(0xAAAA);
+    try state.mark_selfdestruct(addr, recipient);
+    try testing.expectEqual(@as(usize, 1), state.selfdestructs.count());
+}
+
+test "EvmState clear_transaction_state clears all transaction data" {
+    const allocator = testing.allocator;
+
+    var memory_db = MemoryDatabase.init(allocator);
+    defer memory_db.deinit();
+
+    const db_interface = memory_db.to_database_interface();
+    var state = try EvmState.init(allocator, db_interface);
+    defer state.deinit();
+
+    const addr1 = testAddress(0x1111);
+    const addr2 = testAddress(0x2222);
+
+    // Add transient storage
+    try state.set_transient_storage(addr1, 1, 100);
+    try state.set_transient_storage(addr1, 2, 200);
+    try state.set_transient_storage(addr2, 1, 300);
+
+    // Emit logs
+    const topics = [_]u256{1, 2, 3};
+    const data = &[_]u8{ 0xAA, 0xBB, 0xCC };
+    try state.emit_log(addr1, &topics, data);
+    try state.emit_log(addr2, &topics[0..2], data);
+
+    // Mark selfdestructs
+    try state.mark_selfdestruct(addr1, addr2);
+    try state.mark_selfdestruct(addr2, addr1);
+
+    // Verify all data exists
+    try testing.expect(state.transient_storage.count() > 0);
+    try testing.expect(state.logs.items.len > 0);
+    try testing.expect(state.selfdestructs.count() > 0);
+
+    // Clear all transaction state
+    state.clear_transaction_state();
+
+    // Verify everything is cleared
+    try testing.expectEqual(@as(usize, 0), state.transient_storage.count());
+    try testing.expectEqual(@as(usize, 0), state.logs.items.len);
+    try testing.expectEqual(@as(usize, 0), state.selfdestructs.count());
+
+    // Verify transient storage returns zeros
+    try testing.expectEqual(@as(u256, 0), state.get_transient_storage(addr1, 1));
+    try testing.expectEqual(@as(u256, 0), state.get_transient_storage(addr1, 2));
+    try testing.expectEqual(@as(u256, 0), state.get_transient_storage(addr2, 1));
+}
+
+test "EvmState memory leak prevention in transaction simulation" {
+    const allocator = testing.allocator;
+
+    var memory_db = MemoryDatabase.init(allocator);
+    defer memory_db.deinit();
+
+    const db_interface = memory_db.to_database_interface();
+    var state = try EvmState.init(allocator, db_interface);
+    defer state.deinit();
+
+    // Simulate multiple transactions
+    for (0..100) |tx_num| {
+        const addr = testAddress(@as(u160, @intCast(tx_num)));
+
+        // Each transaction does various operations
+        
+        // Set some transient storage
+        for (0..10) |slot| {
+            try state.set_transient_storage(addr, slot, tx_num * 1000 + slot);
+        }
+
+        // Emit logs with different sizes
+        for (0..5) |log_num| {
+            const topics_count = (log_num % 4) + 1;
+            var topics_buf: [4]u256 = undefined;
+            for (0..topics_count) |i| {
+                topics_buf[i] = tx_num * 100 + log_num * 10 + i;
+            }
+
+            const data_size = (log_num + 1) * 50;
+            const data = try allocator.alloc(u8, data_size);
+            defer allocator.free(data);
+            @memset(data, @as(u8, @intCast(log_num)));
+
+            try state.emit_log(addr, topics_buf[0..topics_count], data);
+        }
+
+        // Mark some selfdestructs
+        if (tx_num % 10 == 0) {
+            const recipient = testAddress(@as(u160, @intCast(tx_num + 10000)));
+            try state.mark_selfdestruct(addr, recipient);
+        }
+
+        // Clear transaction state at the end of each transaction
+        state.clear_transaction_state();
+    }
+
+    // After all transactions, only persistent state should remain
+    try testing.expectEqual(@as(usize, 0), state.transient_storage.count());
+    try testing.expectEqual(@as(usize, 0), state.logs.items.len);
+    try testing.expectEqual(@as(usize, 0), state.selfdestructs.count());
 }
