@@ -13,7 +13,7 @@ test "Integration: stack limit boundary conditions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -78,7 +78,7 @@ test "Integration: memory expansion limits" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -138,7 +138,7 @@ test "Integration: arithmetic overflow and underflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -210,7 +210,7 @@ test "Integration: signed arithmetic boundaries" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -273,7 +273,7 @@ test "Integration: bitwise operation boundaries" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -347,7 +347,7 @@ test "Integration: call gas calculation edge cases" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -413,7 +413,7 @@ test "Integration: return data boundary conditions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -492,7 +492,7 @@ test "Integration: exponentiation edge cases" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -562,7 +562,7 @@ test "Integration: jump destination validation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -626,7 +626,7 @@ test "Integration: storage slot temperature transitions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses
@@ -696,7 +696,7 @@ test "Integration: MCOPY overlap handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create test addresses

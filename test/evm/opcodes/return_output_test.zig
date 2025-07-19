@@ -15,7 +15,7 @@ test "RETURN sets output correctly" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Bytecode that stores 0xDEADBEEF and returns it
@@ -62,7 +62,7 @@ test "constructor returns runtime code" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Simple constructor that returns "HELLO"

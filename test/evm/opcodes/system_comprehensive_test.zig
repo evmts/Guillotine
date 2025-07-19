@@ -25,7 +25,7 @@ test "CREATE (0xF0): Basic contract creation with valid init code" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -90,7 +90,7 @@ test "CREATE: Empty init code creates empty contract" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -136,7 +136,7 @@ test "CREATE: Static call protection" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -183,7 +183,7 @@ test "CREATE: Depth limit enforcement" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -232,7 +232,7 @@ test "CREATE: EIP-3860 initcode size limit (Shanghai+)" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Enable EIP-3860
@@ -279,7 +279,7 @@ test "CREATE: EIP-3860 initcode word gas cost" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Enable EIP-3860
@@ -333,7 +333,7 @@ test "CREATE: Memory expansion gas cost" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -387,7 +387,7 @@ test "CREATE: Stack underflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -434,7 +434,7 @@ test "CREATE2 (0xF5): Deterministic address generation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -485,7 +485,7 @@ test "CREATE2: Same parameters produce same address" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const salt = 0x42424242;
@@ -572,7 +572,7 @@ test "CREATE2: Additional gas for keccak256 hashing" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -627,7 +627,7 @@ test "CALL (0xF1): Basic external call" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -682,7 +682,7 @@ test "CALL: Value transfer in static context fails" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -734,7 +734,7 @@ test "CALL: Cold address access (EIP-2929)" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -788,7 +788,7 @@ test "CALL: Return data handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -846,7 +846,7 @@ test "CALLCODE (0xF2): Execute external code with current storage" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -901,7 +901,7 @@ test "DELEGATECALL (0xF4): Execute with current context (no value transfer)" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -955,7 +955,7 @@ test "STATICCALL (0xFA): Read-only external call" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1009,7 +1009,7 @@ test "RETURN (0xF3): Return data from execution" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1059,7 +1059,7 @@ test "RETURN: Empty return data" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1104,7 +1104,7 @@ test "RETURN: Memory expansion gas cost" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1155,7 +1155,7 @@ test "REVERT (0xFD): Revert with error data" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1205,7 +1205,7 @@ test "REVERT: Empty revert data" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1254,7 +1254,7 @@ test "INVALID (0xFE): Consume all gas and fail" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1299,7 +1299,7 @@ test "INVALID: No stack manipulation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1351,7 +1351,7 @@ test "SELFDESTRUCT (0xFF): Schedule contract destruction" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1394,7 +1394,7 @@ test "SELFDESTRUCT: Static call protection" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1440,7 +1440,7 @@ test "SELFDESTRUCT: Cold beneficiary address (EIP-2929)" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1494,7 +1494,7 @@ test "System opcodes: Stack underflow validation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const test_cases = [_]struct {
@@ -1563,7 +1563,7 @@ test "System opcodes: Depth limit enforcement" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const call_opcodes = [_]u8{ 0xF1, 0xF2, 0xF4, 0xFA }; // CALL, CALLCODE, DELEGATECALL, STATICCALL
@@ -1633,7 +1633,7 @@ test "System opcodes: Gas consumption verification" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test CREATE gas with various init code sizes
@@ -1700,7 +1700,7 @@ test "System opcodes: CREATE followed by CALL" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // First, test CREATE
@@ -1760,7 +1760,7 @@ test "System opcodes: Nested STATICCALL restrictions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -1812,7 +1812,7 @@ test "System opcodes: REVERT vs RETURN data handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const test_data = "Test error message";
@@ -1901,7 +1901,7 @@ test "System opcodes: Large memory offsets" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const opcodes_with_memory = [_]u8{ 0xF0, 0xF3, 0xF5, 0xFD }; // CREATE, RETURN, CREATE2, REVERT
@@ -1961,7 +1961,7 @@ test "System opcodes: Zero gas scenarios" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test CALL with zero gas remaining
@@ -2027,7 +2027,7 @@ test "System opcodes: Hardfork feature availability" {
         defer memory_db.deinit();
 
         const db_interface = memory_db.to_database_interface();
-        var test_vm = try Evm.Evm.init(allocator, db_interface, null, null);
+        var test_vm = try Evm.Evm.init(allocator, db_interface);
         defer test_vm.deinit();
 
         const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -2076,7 +2076,7 @@ test "System opcodes: Hardfork feature availability" {
         defer memory_db.deinit();
 
         const db_interface = memory_db.to_database_interface();
-        var test_vm = try Evm.Evm.init(allocator, db_interface, null, null);
+        var test_vm = try Evm.Evm.init(allocator, db_interface);
         defer test_vm.deinit();
 
         const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -2129,7 +2129,7 @@ test "System opcodes: Memory bounds checking" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test CREATE with invalid memory access
@@ -2178,7 +2178,7 @@ test "System opcodes: Gas optimization for warm addresses" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const target_address: Address.Address = [_]u8{0x22} ** 20;

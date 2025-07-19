@@ -19,7 +19,7 @@ test "MSIZE (0x59): Get current memory size" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -97,7 +97,7 @@ test "GAS (0x5A): Get remaining gas" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -169,7 +169,7 @@ test "JUMPDEST (0x5B): Mark valid jump destination" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create bytecode with multiple JUMPDESTs
@@ -246,7 +246,7 @@ test "MSIZE, GAS, JUMPDEST: Gas consumption" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -307,7 +307,7 @@ test "MSIZE: Memory expansion scenarios" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -362,7 +362,7 @@ test "GAS: Low gas scenarios" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -408,7 +408,7 @@ test "JUMPDEST: Code analysis integration" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Complex bytecode with JUMPDEST in data section
@@ -477,7 +477,7 @@ test "Stack operations: MSIZE and GAS push exactly one value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;

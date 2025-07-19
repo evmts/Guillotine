@@ -35,7 +35,7 @@ test "Integration: ERC20 Transfer event logging" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -112,7 +112,7 @@ test "Integration: multiple event emissions" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -207,7 +207,7 @@ test "Integration: event with dynamic array data" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -279,7 +279,7 @@ test "Integration: log gas consumption patterns" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -355,7 +355,7 @@ test "Integration: logging restrictions in static calls" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract in static mode
@@ -412,7 +412,7 @@ test "Integration: event topics for bloom filter" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -498,7 +498,7 @@ test "Integration: log memory expansion costs" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract
@@ -553,7 +553,7 @@ test "Integration: event filtering by topics" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Create contract

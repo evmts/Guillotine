@@ -12,7 +12,7 @@ fn create_test_evm(allocator: std.mem.Allocator) !struct { evm: EVM, memory_db: 
     const memory_db = try allocator.create(MemoryDatabase);
     memory_db.* = MemoryDatabase.init(allocator);
     const db_interface = memory_db.to_database_interface();
-    const evm = try EVM.init(allocator, db_interface, null, null);
+    const evm = try EVM.init(allocator, db_interface);
     return .{ .evm = evm, .memory_db = memory_db };
 }
 

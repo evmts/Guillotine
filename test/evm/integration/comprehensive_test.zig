@@ -19,7 +19,7 @@ test "Integration: Complete ERC20 transfer simulation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Set up accounts
@@ -148,7 +148,7 @@ test "Integration: Smart contract deployment flow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create addresses
@@ -268,7 +268,7 @@ test "Integration: Complex control flow with nested conditions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Contract that implements:
@@ -479,7 +479,7 @@ test "Integration: Gas metering across operations" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create addresses
@@ -579,7 +579,7 @@ test "Integration: Error propagation and recovery" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create addresses

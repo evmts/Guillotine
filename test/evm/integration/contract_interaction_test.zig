@@ -18,7 +18,7 @@ test "Integration: contract creation and initialization" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -98,7 +98,7 @@ test "Integration: inter-contract calls" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -179,7 +179,7 @@ test "Integration: delegatecall context preservation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -253,7 +253,7 @@ test "Integration: staticcall restrictions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -341,7 +341,7 @@ test "Integration: CREATE2 deterministic deployment" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -421,7 +421,7 @@ test "Integration: selfdestruct with balance transfer" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -481,7 +481,7 @@ test "Integration: call depth limit enforcement" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract
@@ -554,7 +554,7 @@ test "Integration: return data buffer management" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create contract

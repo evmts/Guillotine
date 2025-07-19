@@ -25,7 +25,7 @@ test "Integration: Conditional jump patterns" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create bytecode with jump destinations
@@ -114,7 +114,7 @@ test "Integration: Loop implementation with JUMP" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create bytecode for loop
@@ -194,7 +194,7 @@ test "Integration: Return data handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     const alice_address = primitives.Address.from_u256(0x1111111111111111111111111111111111111111);
@@ -258,7 +258,7 @@ test "Integration: Revert with reason" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     const alice_address = primitives.Address.from_u256(0x1111111111111111111111111111111111111111);
@@ -321,7 +321,7 @@ test "Integration: PC tracking through operations" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     const alice_address = primitives.Address.from_u256(0x1111111111111111111111111111111111111111);
@@ -383,7 +383,7 @@ test "Integration: Invalid opcode handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     const alice_address = primitives.Address.from_u256(0x1111111111111111111111111111111111111111);
@@ -438,7 +438,7 @@ test "Integration: Nested conditions with jumps" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Create bytecode with multiple jump destinations
@@ -526,7 +526,7 @@ test "Integration: Self-destruct with beneficiary" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var vm = try Evm.Evm.init(allocator, db_interface);
     defer vm.deinit();
 
     const alice_address = primitives.Address.from_u256(0x1111111111111111111111111111111111111111);

@@ -16,7 +16,7 @@ test "PUSH0: append zero value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -59,7 +59,7 @@ test "PUSH1: append 1 byte value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code with PUSH1 0xAB
@@ -111,7 +111,7 @@ test "PUSH2: append 2 byte value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code with PUSH2 0x1234
@@ -161,7 +161,7 @@ test "PUSH32: append 32 byte value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code with PUSH32 followed by 32 bytes
@@ -220,7 +220,7 @@ test "POP: remove top stack item" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -268,7 +268,7 @@ test "DUP1: duplicate top stack item" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -314,7 +314,7 @@ test "DUP2: duplicate second stack item" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -362,7 +362,7 @@ test "DUP16: duplicate 16th stack item" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -417,7 +417,7 @@ test "SWAP1: swap top two stack items" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -464,7 +464,7 @@ test "SWAP2: swap 1st and 3rd stack items" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -513,7 +513,7 @@ test "SWAP16: swap 1st and 17th stack items" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -571,7 +571,7 @@ test "PUSH1: at end of code" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code with PUSH1 but no data byte
@@ -621,7 +621,7 @@ test "PUSH32: partial data available" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code with PUSH32 but only 10 data bytes
@@ -686,7 +686,7 @@ test "POP: stack underflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -728,7 +728,7 @@ test "DUP1: stack underflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -770,7 +770,7 @@ test "DUP16: insufficient stack items" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -816,7 +816,7 @@ test "SWAP1: stack underflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -859,7 +859,7 @@ test "PUSH1: stack overflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Set contract code
@@ -910,7 +910,7 @@ test "DUP1: stack overflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;

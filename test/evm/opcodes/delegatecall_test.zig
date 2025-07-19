@@ -26,7 +26,7 @@ test "DELEGATECALL basic functionality" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Vm.init(allocator, db_interface, null, null);
+    var vm = try Vm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Setup context
@@ -127,7 +127,7 @@ test "DELEGATECALL preserves sender and value" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Vm.init(allocator, db_interface, null, null);
+    var vm = try Vm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Setup context
@@ -212,7 +212,7 @@ test "DELEGATECALL with storage access" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try Vm.init(allocator, db_interface, null, null);
+    var vm = try Vm.init(allocator, db_interface);
     defer vm.deinit();
 
     // Setup context

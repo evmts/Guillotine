@@ -19,7 +19,7 @@ test "TLOAD (0x5C): Load from transient storage" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -91,7 +91,7 @@ test "TSTORE (0x5D): Store to transient storage" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -169,7 +169,7 @@ test "MCOPY (0x5E): Memory to memory copy" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -268,7 +268,7 @@ test "PUSH0 (0x5F): Push zero onto stack" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -334,7 +334,7 @@ test "PUSH1 (0x60): Push 1 byte onto stack" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const code = [_]u8{
@@ -392,7 +392,7 @@ test "PUSH2 (0x61): Push 2 bytes onto stack" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const code = [_]u8{
@@ -449,7 +449,7 @@ test "PUSH3 (0x62): Push 3 bytes onto stack" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const code = [_]u8{
@@ -510,7 +510,7 @@ test "Transient storage and memory opcodes: Gas consumption" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const code = [_]u8{ 0x60, 0x42 }; // PUSH1 data for testing
@@ -605,7 +605,7 @@ test "MCOPY: Edge cases" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -648,7 +648,7 @@ test "Transient storage: Isolation between addresses" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const caller = [_]u8{0x11} ** 20;
@@ -720,7 +720,7 @@ test "PUSH operations: Boundary conditions" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test PUSH with truncated data at end of code
