@@ -87,7 +87,7 @@ jobs:
             -v ${{ github.workspace }}:/workspace \
             -w /workspace \
             guillotine-${{ matrix.container }}:latest \
-            bash -c "cd /workspace && rm -rf .zig-cache && rm -rf ~/.cache/zig && rm -rf target && node --version && zig version && zig build && zig build bench"
+            bash -c "cd /workspace && rm -rf .zig-cache && rm -rf ~/.cache/zig && rm -rf target && node --version && zig version && zig build --verbose && zig build test --verbose"
 
       - name: Report Results
         if: always()
