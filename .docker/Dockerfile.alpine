@@ -24,9 +24,9 @@ RUN apk add --no-cache nodejs npm && \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install Zig 0.14.0
-RUN curl -L https://ziglang.org/download/0.14.0/zig-linux-x86_64-0.14.0.tar.xz | tar -xJ -C /opt && \
-    ln -s /opt/zig-linux-x86_64-0.14.0/zig /usr/local/bin/zig
+# Install Zig 0.14.1
+RUN curl -L https://ziglang.org/download/0.14.1/zig-linux-x86_64-0.14.1.tar.xz | tar -xJ -C /opt && \
+    ln -s /opt/zig-linux-x86_64-0.14.1/zig /usr/local/bin/zig
 
 # Set working directory
 WORKDIR /workspace
