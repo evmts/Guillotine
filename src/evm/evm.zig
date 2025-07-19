@@ -477,29 +477,6 @@ test "Evm access list operations" {
     try testing.expectEqual(true, evm.access_list.is_address_warm(test_addr));
 }
 
-<<<<<<< HEAD
-=======
-test "Evm stack operations via stack field" {
-    const allocator = testing.allocator;
-    
-    var memory_db = MemoryDatabase.init(allocator);
-    defer memory_db.deinit();
-    
-    const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.init(allocator, db_interface);
-    defer evm.deinit();
-    
-    try testing.expectEqual(@as(usize, 0), evm.stack.size);
-    
-    try evm.stack.append(42);
-    try testing.expectEqual(@as(usize, 1), evm.stack.size);
-    
-    const value = try evm.stack.pop();
-    try testing.expectEqual(@as(u256, 42), value);
-    try testing.expectEqual(@as(usize, 0), evm.stack.size);
-}
->>>>>>> 5f89c25 (✨ Implement EVM builder pattern for issue #18)
-
 test "Evm jump table access" {
     const allocator = testing.allocator;
     

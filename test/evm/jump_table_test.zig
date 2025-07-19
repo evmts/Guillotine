@@ -82,7 +82,7 @@ test "JumpTable execute consumes gas before opcode execution" {
     var memory_db = MemoryDatabase.init(test_allocator);
     defer memory_db.deinit();
     const db_interface = memory_db.to_database_interface();
-    var test_vm = try Evm.Evm.init(test_allocator, db_interface, null, null);
+    var test_vm = try Evm.Evm.init(test_allocator, db_interface);
     defer test_vm.deinit();
     
     var builder = Frame.builder(test_allocator);
