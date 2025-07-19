@@ -30,7 +30,7 @@ fn create_test_evm(allocator: std.mem.Allocator) !struct { evm: *Evm.Evm, memory
     const memory_db = try allocator.create(MemoryDatabase);
     memory_db.* = MemoryDatabase.init(allocator);
     const db_interface = memory_db.to_database_interface();
-    evm.* = try Evm.Evm.init(allocator, db_interface, null, null);
+    evm.* = try Evm.Evm.init(allocator, db_interface);
 
     // Set up basic context
     const tx_origin = [_]u8{0x12} ** 20;

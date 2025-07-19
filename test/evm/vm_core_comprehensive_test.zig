@@ -139,7 +139,7 @@ test "VMCore: VM initialization with default hardfork" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Verify VM is properly initialized
@@ -184,7 +184,7 @@ test "VMCore: VM program counter management and control flow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Test bytecode with PC-modifying operations
@@ -226,7 +226,7 @@ test "VMCore: VM execution loop with gas tracking" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Simple bytecode: PUSH1 1, PUSH1 2, ADD, STOP
@@ -264,7 +264,7 @@ test "VMCore: VM depth tracking in nested calls" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Test depth increments properly
@@ -300,7 +300,7 @@ test "VMCore: VM static context enforcement" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     const caller: Address.Address = [_]u8{0x11} ** 20;
@@ -333,7 +333,7 @@ test "VMCore: VM instruction dispatch error handling" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Test invalid opcode
@@ -868,7 +868,7 @@ test "VMCore: Integration - Complete execution flow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Bytecode: PUSH1 10, PUSH1 20, ADD, MSTORE(0), MLOAD(0), STOP
@@ -913,7 +913,7 @@ test "VMCore: Integration - Error propagation across components" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Test stack underflow error propagation
@@ -948,7 +948,7 @@ test "VMCore: Integration - Memory and gas coordination" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var vm = try VM.init(allocator, db_interface, null, null);
+    var vm = try VM.init(allocator, db_interface);
     defer vm.deinit();
 
     // Test large memory allocation with limited gas

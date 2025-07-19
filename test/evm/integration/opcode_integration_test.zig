@@ -31,7 +31,7 @@ test "integration: simple arithmetic sequence" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: PUSH1 5, PUSH1 3, ADD, PUSH1 2, MUL
@@ -87,7 +87,7 @@ test "integration: memory operations sequence" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Store 42 at memory position 0, then load it
@@ -145,7 +145,7 @@ test "integration: storage operations sequence" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -205,7 +205,7 @@ test "integration: control flow with jumps" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: conditional jump over invalid instruction
@@ -265,7 +265,7 @@ test "integration: environment access sequence" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -327,7 +327,7 @@ test "integration: stack operations sequence" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Complex stack manipulation
@@ -389,7 +389,7 @@ test "integration: return data handling" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Return some data
@@ -448,7 +448,7 @@ test "integration: revert with reason" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Revert with error message
@@ -507,7 +507,7 @@ test "integration: gas consumption tracking" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const initial_gas: u64 = 10000;
@@ -563,7 +563,7 @@ test "integration: out of gas scenario" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Try to execute with insufficient gas
@@ -613,7 +613,7 @@ test "integration: invalid opcode handling" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Execute invalid opcode
@@ -662,7 +662,7 @@ test "integration: transient storage operations" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -722,7 +722,7 @@ test "integration: logging operations" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -787,7 +787,7 @@ test "integration: cold/warm storage access (EIP-2929)" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -847,7 +847,7 @@ test "integration: push0 operation (Shanghai)" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Use PUSH0 from Shanghai hardfork
@@ -903,7 +903,7 @@ test "integration: mcopy operation (Cancun)" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test program: Copy memory using MCOPY

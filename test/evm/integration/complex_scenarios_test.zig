@@ -30,7 +30,7 @@ test "complex: fibonacci calculation" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Calculate fibonacci(10) using loops and conditionals
@@ -129,7 +129,7 @@ test "complex: storage-based counter with access patterns" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xc0ffee000000000000000000000000000000cafe);
@@ -212,7 +212,7 @@ test "complex: memory expansion with large offsets" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test memory expansion gas costs
@@ -280,7 +280,7 @@ test "complex: nested conditionals with multiple jumps" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Implement: if (a > b) { if (a > c) { result = 1 } else { result = 2 } } else { result = 3 }
@@ -374,7 +374,7 @@ test "complex: event emission with multiple topics" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = Address.from_u256(0xdeadbeef00000000000000000000000000000000);
@@ -449,7 +449,7 @@ test "complex: keccak256 hash computation" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Compute keccak256 of "Hello, World!"
@@ -518,7 +518,7 @@ test "complex: call depth limit enforcement" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Note: This test would need proper CALL implementation to work fully
@@ -574,7 +574,7 @@ test "complex: bit manipulation operations" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test various bit operations
@@ -679,7 +679,7 @@ test "complex: modular arithmetic edge cases" {
 
     // Create EVM instance
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     // Test ADDMOD and MULMOD with edge cases

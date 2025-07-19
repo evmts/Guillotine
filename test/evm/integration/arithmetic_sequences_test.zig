@@ -23,7 +23,7 @@ test "Integration: Complex arithmetic calculation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -87,7 +87,7 @@ test "Integration: Modular arithmetic with overflow" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -149,7 +149,7 @@ test "Integration: Fibonacci sequence calculation" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -224,7 +224,7 @@ test "Integration: Conditional arithmetic based on comparison" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -314,7 +314,7 @@ test "Integration: Calculate average of multiple values" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -382,7 +382,7 @@ test "Integration: Complex ADDMOD and MULMOD calculations" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);
@@ -467,7 +467,7 @@ test "Integration: Exponentiation chain" {
     defer memory_db.deinit();
 
     const db_interface = memory_db.to_database_interface();
-    var evm = try Evm.Evm.init(allocator, db_interface, null, null);
+    var evm = try Evm.Evm.init(allocator, db_interface);
     defer evm.deinit();
 
     const contract_address = primitives.Address.from_u256(0x3333);

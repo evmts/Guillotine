@@ -65,7 +65,7 @@ export fn guillotine_init() c_int {
         return @intFromEnum(GuillotineError.GUILLOTINE_ERROR_MEMORY);
     };
 
-    vm.* = Evm.init(allocator, db_interface, null, null) catch |err| {
+    vm.* = Evm.init(allocator, db_interface) catch |err| {
         log(.err, .guillotine_c, "Failed to initialize VM: {}", .{err});
         allocator.destroy(vm);
         return @intFromEnum(GuillotineError.GUILLOTINE_ERROR_MEMORY);

@@ -9,7 +9,7 @@ test "fuzz_comparison_lt_operations" {
     var db = evm.MemoryDatabase.init(allocator);
     defer db.deinit();
     
-    var vm = try evm.Evm.init(allocator, db.to_database_interface(), null, null);
+    var vm = try evm.Evm.init(allocator, db.to_database_interface());
     defer vm.deinit();
     
     const test_code = [_]u8{0x01};
@@ -52,7 +52,7 @@ test "fuzz_comparison_eq_operations" {
     var db = evm.MemoryDatabase.init(allocator);
     defer db.deinit();
     
-    var vm = try evm.Evm.init(allocator, db.to_database_interface(), null, null);
+    var vm = try evm.Evm.init(allocator, db.to_database_interface());
     defer vm.deinit();
     
     const test_code = [_]u8{0x01};
@@ -95,7 +95,7 @@ test "fuzz_comparison_iszero_operations" {
     var db = evm.MemoryDatabase.init(allocator);
     defer db.deinit();
     
-    var vm = try evm.Evm.init(allocator, db.to_database_interface(), null, null);
+    var vm = try evm.Evm.init(allocator, db.to_database_interface());
     defer vm.deinit();
     
     const test_code = [_]u8{0x01};
