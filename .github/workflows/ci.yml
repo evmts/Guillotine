@@ -27,9 +27,9 @@ jobs:
           fetch-depth: 0
 
       - name: Install Zig
-        uses: mlugg/setup-zig@v1
+        uses: mlugg/setup-zig@v2
         with:
-          version: 0.14.0
+          version: 0.14.1
 
       - name: Create Zig cache directory
         run: mkdir -p ~/.cache/zig
@@ -87,7 +87,7 @@ jobs:
             -v ${{ github.workspace }}:/workspace \
             -w /workspace \
             guillotine-${{ matrix.container }}:latest \
-            bash -c "cd /workspace && rm -rf .zig-cache && rm -rf ~/.cache/zig && rm -rf target && node --version && zig version && zig build && zig build bench"
+            bash -c "cd /workspace && rm -rf .zig-cache && rm -rf ~/.cache/zig && rm -rf target && node --version && zig version && zig build --verbose && zig build test --verbose"
 
       - name: Report Results
         if: always()
