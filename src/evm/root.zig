@@ -174,10 +174,35 @@ pub const bitvec = @import("frame/bitvec.zig");
 /// Chain-specific validation rules
 pub const chain_rules = @import("hardforks/chain_rules.zig");
 
+/// Chain type enumeration for L2 support
+pub const ChainType = @import("chain_type.zig").ChainType;
+
 /// Hardforks namespace for easier access
 pub const hardforks = struct {
     pub const chain_rules = @import("hardforks/chain_rules.zig");
     pub const hardfork = @import("hardforks/hardfork.zig");
+};
+
+/// Optimism L2 support
+pub const optimism = struct {
+    pub const DepositTransaction = @import("optimism/deposit_transaction.zig").DepositTransaction;
+    pub const OptimismContext = @import("optimism/deposit_transaction.zig").OptimismContext;
+    pub const DEPOSIT_TX_TYPE = @import("optimism/deposit_transaction.zig").DEPOSIT_TX_TYPE;
+    pub const OptimismHardfork = @import("optimism/hardfork.zig").OptimismHardfork;
+    pub const OptimismRules = @import("optimism/hardfork.zig").OptimismRules;
+    pub const L1BlockInfo = @import("optimism/l1_block_info.zig").L1BlockInfo;
+    pub const L1BlockSlots = @import("optimism/l1_block_info.zig").L1BlockSlots;
+    pub const L1GasConstants = @import("optimism/l1_block_info.zig").L1GasConstants;
+    pub const calculateDataGas = @import("optimism/l1_block_info.zig").calculateDataGas;
+    pub const calculateL1Cost = @import("optimism/l1_cost.zig").calculateL1Cost;
+    pub const calculateOperatorFee = @import("optimism/l1_cost.zig").calculateOperatorFee;
+    pub const loadL1BlockInfo = @import("optimism/l1_block_reader.zig").loadL1BlockInfo;
+    pub const L1BlockInfoCache = @import("optimism/l1_block_reader.zig").L1BlockInfoCache;
+    pub const DepositExecutionContext = @import("optimism/deposit_execution.zig").DepositExecutionContext;
+    pub const DepositBehavior = @import("optimism/deposit_execution.zig").DepositBehavior;
+    pub const calculateDepositGasUsed = @import("optimism/deposit_execution.zig").calculateDepositGasUsed;
+    pub const validateDeposit = @import("optimism/deposit_execution.zig").validateDeposit;
+    pub const getDepositBehavior = @import("optimism/deposit_execution.zig").getDepositBehavior;
 };
 
 /// EVM opcode definitions and utilities
